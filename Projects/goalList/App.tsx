@@ -9,39 +9,44 @@ import {
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 export default function App() {
-  const [tasks, setTasks] = useState<string[]>([])
-  const [input , setInput] = useState('')
-  const handleInputChange = (val: string)=>{
-    setInput(val)
-    console.log(val)
-  }
-  const handleSetGoal =()=>{
-    if(input.trim()){
-    setTasks(tasks => [...tasks,input])
-    setInput('')
+  const [tasks, setTasks] = useState<string[]>([]);
+  const [input, setInput] = useState("");
+  const handleInputChange = (val: string) => {
+    setInput(val);
+    console.log(val);
+  };
+  const handleSetGoal = () => {
+    if (input.trim()) {
+      setTasks((tasks) => [...tasks, input]);
+      setInput("");
     }
-  }
-  const handleInputReset=()=>{
-    setInput('')
-  }
-  const handleDeleteGoal = (index : number) => {
-      setTasks((tasks) => tasks.filter((_, i) => i !== index));
+  };
+  const handleInputReset = () => {
+    setInput("");
+  };
+  const handleDeleteGoal = (index: number) => {
+    setTasks((tasks) => tasks.filter((_, i) => i !== index));
   };
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <View style={styles.inputContainer}>
-          <View style={{flexDirection:'row'}}>
-          <TextInput
-            placeholder="Enter your Goal"
-            placeholderTextColor="#0b3d8c"
-            style={styles.inputBox}
-            onChangeText={handleInputChange}
-            >{input}</TextInput>
-            <TouchableOpacity style={styles.resetButton} onPress={handleInputReset}>
-              <Text style={{color : 'red' , fontSize:24}}>X</Text>
+          <View style={{ flexDirection: "row" }}>
+            <TextInput
+              placeholder="Enter your Goal"
+              placeholderTextColor="#0b3d8c"
+              style={styles.inputBox}
+              onChangeText={handleInputChange}
+            >
+              {input}
+            </TextInput>
+            <TouchableOpacity
+              style={styles.resetButton}
+              onPress={handleInputReset}
+            >
+              <Text style={{ color: "red", fontSize: 24 }}>X</Text>
             </TouchableOpacity>
-            </View>
+          </View>
           <TouchableOpacity style={styles.inputButton} onPress={handleSetGoal}>
             <Text style={[styles.headingText, { color: "white" }]}>ADD</Text>
           </TouchableOpacity>
@@ -51,7 +56,10 @@ export default function App() {
           {tasks.map((item, index) => (
             <View key={index} style={styles.item}>
               <Text style={styles.text}>{item}</Text>
-              <TouchableOpacity onPress={() => handleDeleteGoal(index)} style={styles.deleteButton}>
+              <TouchableOpacity
+                onPress={() => handleDeleteGoal(index)}
+                style={styles.deleteButton}
+              >
                 <Text style={{ color: "red" }}>Delete</Text>
               </TouchableOpacity>
             </View>
@@ -73,7 +81,7 @@ const styles = StyleSheet.create({
     margin: 5,
     borderBottomWidth: 2,
     borderBottomColor: "black",
-    alignItems: "center",
+    alignItems: "center", 
   },
   goalContainer: {
     flex: 3,
@@ -101,7 +109,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#0b3d8c",
+    backgroundColor: "#080f0f",
     elevation: 5,
     shadowOffset: {
       width: 1,
@@ -114,25 +122,23 @@ const styles = StyleSheet.create({
     padding: 16,
     marginVertical: 8,
     marginHorizontal: 16,
-    backgroundColor: '#add8e6',
+    backgroundColor: "#add8e6",
     borderRadius: 8,
-    flexDirection:'row',
-    alignItems:'center',
+    flexDirection: "row",
+    alignItems: "center",
     justifyContent: "space-between",
   },
   text: {
     fontSize: 20,
   },
-  deleteButton:{
-    
-  },
-  resetButton:{
-    color:'red',
-    borderWidth:1,
-    borderLeftWidth:0,
-    width:30,
+  deleteButton: {},
+  resetButton: {
+    color: "red",
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    width: 30,
     justifyContent: "center",
-    alignItems: 'center',
-    borderRadius:4
-  }
+    alignItems: "center",
+    borderRadius: 4,
+  },
 });
